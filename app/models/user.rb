@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   				format: { with: VALID_EMAIL_REGEX },
   				uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   class << self
     # Returns the hash digest of the given string.
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
       SecureRandom.urlsafe_base64
     end
   end
-  
+
   # Remembers a user in the database for use in persistent sessions.
   def remember
     self.remember_token = User.new_token
